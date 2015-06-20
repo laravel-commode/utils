@@ -1,0 +1,23 @@
+{
+    "name": "laravel-commode/utils",
+    "description": "",
+    "authors": [
+        {
+            "name": "dubpub",
+            "email": "dubpubz@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "illuminate/support": "5.1.*",
+        "illuminate/container": "5.1.*",
+        "illuminate/translation": "5.1.*",
+        "laravel-commode/silent-service": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelCommode\\Utils\\": "src/LaravelCommode/Utils"
+        }
+    },
+    "minimum-stability": "dev"
+}
