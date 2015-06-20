@@ -57,6 +57,18 @@ class MetaManagerTest extends PHPUnit_Framework_TestCase
         $name = uniqid('name');
         $this->testInstance->registerMetaAttributes($name, $mockClass = get_class($this->metaAttributesMock));
         $this->assertSame($mockClass, get_class($this->testInstance->getMetaAttributes($name)));
+
+        try {
+            $this->testInstance->registerMetaAttributes($name = uniqid(), 'stdClass');
+        } catch (\Exception $e) {
+            $this->assertTrue(
+                $e instanceof \InvalidArgumentException
+            );
+            $this->assertSame(
+                'Meta attribute but be extended from '.MetaAttributes::class.'. stdClass was given.',
+                $e->getMessage()
+            );
+        }
     }
 
     protected function tearDown()
