@@ -31,10 +31,6 @@ if (!function_exists('trans')) {
      */
     function trans($id = null, $parameters = [], $domain = 'messages', $locale = null)
     {
-        if (is_null($id)) {
-            return app('translator');
-        }
-
         return app('translator')->trans($id, $parameters, $domain, $locale);
     }
 }
