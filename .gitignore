@@ -1,6 +1,7 @@
 /vendor
 /.idea
 /doc
+/ignore
 composer.phar
 composer.lock
 .DS_Store
