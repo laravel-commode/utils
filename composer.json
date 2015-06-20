@@ -16,7 +16,7 @@
     },
     "require-dev": {
         "satooshi/php-coveralls": "dev-master",
-        "phpunit/phpunit": "dev-master"
+        "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
         "psr-4": {
