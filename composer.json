@@ -14,6 +14,9 @@
         "illuminate/translation": "5.1.*",
         "laravel-commode/silent-service": "dev-master"
     },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "LaravelCommode\\Utils\\": "src/LaravelCommode/Utils"
