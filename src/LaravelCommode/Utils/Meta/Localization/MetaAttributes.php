@@ -8,6 +8,12 @@ abstract class MetaAttributes
      * @var string
      */
     private $locale;
+
+    /**
+     * @var string
+     */
+    private $elementTag = 'label';
+
     /**
      * @var string
      */
@@ -65,5 +71,28 @@ abstract class MetaAttributes
     {
         $this->lookUpLocation = $lookUpLocation;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getElementTag()
+    {
+        return $this->elementTag;
+    }
+
+    /**
+     * @param string $elementTag
+     * @return $this
+     */
+    public function setElementTag($elementTag)
+    {
+        $this->elementTag = $elementTag;
+        return $this;
+    }
+
+    public function element($key)
+    {
+        return "<{$this->elementTag}>{$this->{$key}}</{$this->elementTag}>";
     }
 }

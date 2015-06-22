@@ -53,6 +53,32 @@ class MetaAttributesTest extends PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
+    protected function generateData()
+    {
+        return [
+            '_' => [
+                'login' => uniqid()
+            ],
+            'ru' => [
+                'login' => uniqid()
+            ],
+            'en' => [
+                'login' => uniqid()
+            ]
+        ];
+    }
+
+    protected function fillTestInstance(array $testData)
+    {
+        foreach ($testData as $localePrefix => $values) {
+            foreach ($values as $key => $value) {
+                $propertyName = $localePrefix.'_'.$key;
+                $this->testInstance->{$propertyName} = null;
+                $this->testInstance->{$propertyName} = $value;
+            }
+        }
+    }
+
     public function testGettersAndSetters()
     {
         $this->assertSame('_', $this->testInstance->getLocale());
@@ -66,27 +92,12 @@ class MetaAttributesTest extends PHPUnit_Framework_TestCase
         $this->testInstance->setLocale('validation.attributes');
     }
 
+
+
     public function testExistentGet()
     {
-        $testArray = [
-            '_' => [
-                'login' => uniqid()
-            ],
-            'ru' => [
-                'login' => uniqid()
-            ],
-            'en' => [
-                'login' => uniqid()
-            ]
-        ];
-
-        foreach ($testArray as $localePrefix => $values) {
-            foreach ($values as $key => $value) {
-                $propertyName = $localePrefix.'_'.$key;
-                $this->testInstance->{$propertyName} = null;
-                $this->testInstance->{$propertyName} = $value;
-            }
-        }
+        $testArray = $this->generateData();
+        $this->fillTestInstance($testArray);
 
         foreach ($testArray as $localePrefix => $values) {
             $this->testInstance->setLocale($localePrefix);
@@ -125,6 +136,23 @@ class MetaAttributesTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('Login', $this->testInstance->login);
         $this->assertSame('not_existent', $this->testInstance->not_existent);
+    }
+
+    public function testElement()
+    {
+        $testArray = $this->generateData();
+        $this->fillTestInstance($testArray);
+
+        $this->assertSame('label', $this->testInstance->getElementTag());
+        $this->assertSame($this->testInstance, $this->testInstance->setElementTag('span'));
+
+        foreach ($testArray as $localePrefix => $values) {
+            $this->testInstance->setLocale($localePrefix);
+
+            foreach ($values as $key => $value) {
+                $this->assertSame("<span>{$value}</span>", $this->testInstance->element($key));
+            }
+        }
     }
 
     protected function tearDown()
